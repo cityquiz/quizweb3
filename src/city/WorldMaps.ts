@@ -265,7 +265,7 @@ const stopNpcB=[
         cutsceneSpaces: {
             [utils.asGridCoord(31,9)]:stopNpcB,
             [utils.asGridCoord(30,9)]: stopNpcB,
-            [utils.asGridCoord(5,10)]:[
+            [utils.asGridCoord(18,11)]:[
                 {
                     events: [
                         { type: "changeMap", map: "Kitchen"}
@@ -275,7 +275,7 @@ const stopNpcB=[
         }
     },
     Kitchen:{
-        lowerSrc: "/assets/images/maps/KitchenLower.png",
+        lowerSrc: "/assets/images/maps/Level_0.png",
         //lowerSrc: "/preview1.png",
         
         upperSrc: "/assets/images/maps/KitchenUpper.png",

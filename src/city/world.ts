@@ -1,4 +1,10 @@
+
+import { useWallet } from "@/stores/store-wallet";
+import { computed, watch } from "vue";
 import  { DirectionInput } from "./DirectionInput";
+import { Hud } from "./Hud";
+//import  { Hud } from "./Hud";
+
 import { KeyPressedListener } from "./KeyPressedListener";
 import { OverWorldMap } from "./WorldMaps";
 
@@ -10,27 +16,31 @@ export class Overworld {
     canvas: HTMLCanvasElement;
     ctx: CanvasRenderingContext2D ;
     map: OverWorldMap | null;
+    hud?: Hud;
 
     directionInput: DirectionInput | null = null;
+
+    //user: any;
 
     constructor(config: ConfigOverworld){
         this.element = config.element;
         this.canvas = this.element.querySelector(".game-canvas")!;
         this.ctx = this.canvas!.getContext("2d")!;
         this.map= null;
+        
     }
 
     startGameLoop(){
-        let nextTime=0;
-        const step = (time=1000)=>{
+        //let nextTime=0;
+        const step = (time: number=800)=>{
             // clear off the canvas
                 
                 this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
 
                     //stablecemos la camara de la persona
                 const cameraPerson = this.map!.gameObjects.get("hero")!;
-                if(time>nextTime){
-                    nextTime= time+10;
+                //if(time>nextTime){
+                    //nextTime= time+10;
                     this.map?.gameObjects.forEach((object)=>{
                         object.update({
                             arrow: this.directionInput!.direction,
@@ -45,7 +55,7 @@ export class Overworld {
                         });
                         //console.log(object)
                     }); */
-                }
+                //}
                     this.map!.drawLowerImage(this.ctx, cameraPerson);
 
                 //draw game objects
@@ -104,12 +114,25 @@ export class Overworld {
     }
 
 
+   
+
+    
+
     init(){
 
 
+        const stateUser=useWallet();
+        const user=computed(()=>stateUser.getUser);
         //agregamos los hud en el mapa
-        //this.hud = new Hud();
-        //this.hud.init(document.querySelector(".game-container"));
+        this.hud = new Hud(user.value.username); 
+        this.hud.init(document.querySelector(".game-container")!);
+
+        watch(user,(newUser)=>{
+            debugger
+            this.hud?.setUsername(newUser.username!);
+            this.hud?.createElement();
+        })
+  
 
         this.startMap((window as any).OverWorldMap.DemoRoom);
 

@@ -11,5 +11,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-  assetsInclude: ['assets/**/*.png']
+  assetsInclude: ['assets/**/*.png'],
+  
+  server: {
+    hmr: { overlay: false },
+  },
+  
+    
 })

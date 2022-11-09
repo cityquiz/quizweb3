@@ -1,7 +1,7 @@
 <template>
 
-
-<Game></Game>
+  <Register v-if="isConnected"></Register>
+  <Game v-if="user.username"></Game>
 <!--   <header>
     
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
@@ -15,7 +15,27 @@
 </template>
 
 <script setup lang="ts">
-import Game from "./components/Game.vue"
+  import { computed } from "vue";
+  import Game from "./components/Game.vue"
+  import Register from "./components/Register.vue"
+  import { useWallet } from "./stores/store-wallet";
+  
+
+  const stateWallet = useWallet();
+  stateWallet.initStorage();
+
+  const user= computed(()=>stateWallet.getUser);
+
+  const isConnected = computed(()=>{
+    
+    const username= stateWallet.isConnected;
+    console.log(username);
+
+
+    return username;
+  });
+
+
 </script>
 
 <style>
