@@ -134,7 +134,7 @@ export class Overworld {
         })
   
 
-        this.startMap((window as any).OverWorldMap.DemoRoom);
+        this.startMap((window as any).OverWorldMap.Kitchen);
 
         this.bindActionInput();
         this.bindHeroPositionCheck();

@@ -2,8 +2,8 @@ import { Direction } from "./interfaces/Behavior";
 
 export const utils= {
     widthGrid(n: number){
-        return n * 32;
-        //return n * 16
+        // return n * 32;
+        return n * 16
     },
     asGridCoord(x: number,y: number){
         return `${x*16},${y*16}`
