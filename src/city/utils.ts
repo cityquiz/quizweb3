@@ -22,7 +22,6 @@ export const utils= {
         }else if(direction== "down"){
             y+= size;
         }
-
         return {x,y};
     },
 
