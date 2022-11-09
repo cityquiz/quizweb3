@@ -293,8 +293,26 @@ const stopNpcB=[
                 
                 {type: "textMessage", text: "Hola, hoy es un buen dia para aprender!", faceHero: "npcB"}
             ]
-        },))
-        
+        },)),
+        walls: {
+            //"16,16": true
+            [utils.asGridCoord(7,6)]: true,
+            [utils.asGridCoord(8,6)]: true,
+            [utils.asGridCoord(7,7)]: true,
+            [utils.asGridCoord(8,7)]: true,
+        },
+        // Definir salida habitaicón
+        cutsceneSpaces: {
+            // [utils.asGridCoord(31,9)]:stopNpcB,
+            // [utils.asGridCoord(30,9)]: stopNpcB,
+            [utils.asGridCoord(18,11)]:[
+                {
+                    events: [
+                        { type: "changeMap", map: "DemoRoom"}
+                    ]
+                }
+            ]
+        }
         
     }
 }
