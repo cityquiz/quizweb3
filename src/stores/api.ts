@@ -1,5 +1,8 @@
+import { Enemies } from "@/city/Content/enemies";
+import type { CheckProjectInput } from "@/models/Inputs/CheckProjectInput";
 import type { ProjectInput } from "@/models/Inputs/Project";
 import type { Project } from "@/models/Project";
+import type { Quiz } from "@/models/Quiz";
 const cn= "http://localhost:8000";
 
 const post=(uri: string, args:{})=>{
@@ -48,14 +51,57 @@ const postProject= (data: ProjectInput):Promise<Project>=>{
 }
 
 
-const getQuizById=(quiz_id:number)=>{
-  debugger;
-  return get(`${cn}/quizes/${quiz_id}`);
+const getProjectQuizById=(project_id:string):Promise<Project>=>{
+  const quiz= {
+    "name": "Npc1",
+    "logo": "logo.jpg",
+    "description": "description for moonbean",
+    "id": 1,
+    "quizes": [
+      {
+        "id": 2,
+        "name": "la capita de chevala",
+        "questions": [
+          {
+            "id": 4,
+            "question": "Lima"
+          },
+          {
+            "id": 5,
+            "question": "Talara"
+          },
+          {
+            "id": 6,
+            "question": "Panama"
+          }
+        ]
+      }
+    ]
+  };
+  
+
+
+  /* return  new Promise((resolve, reject) => {
+    resolve(quiz as unknown as Project);
+      //reject(new Error("Something awful happened"));
+    }); */
+  return get(`${cn}/projects/${project_id}`);
 }
 
+
+
+const postCheckQuizProject=async (response:CheckProjectInput)=>{
+  //const Enemies.values
+  
+  await sleep(10000);
+  console.log(response);
+}
+
+const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
 export {
     getProjects,
     postProject,
-    getQuizById
+    getProjectQuizById,
+    postCheckQuizProject
 }

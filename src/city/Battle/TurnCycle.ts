@@ -42,20 +42,45 @@ export class TurnCycle implements ConfigTurnCycle{
         }
         
         //const postEvents = caster.getPostEvents();
-        const questionsEvents = this.battle.questions;
+        const questionsEvents = this.battle.quizes;
         
         for(let i=0; i<questionsEvents.length; i++){
+            debugger;
             const event = {
                 type: "makeToQuestion",
                 question: questionsEvents[i],
                 //target: submission.target
             }
-            
             const response = await this.onNewEvent(event);
             
-            
+            this.battle.responses.push(response);
+        }
+        
+
+        //resolver quiz 
+        const event = {
+            type: "loading",
+            title: "Loading...",
+            message: "Estamos evaluando su examen.",
+            project_id: this.battle.enemy.project_name,
+            quiz_id: this.battle.enemy.quiz_id,
+            responses: this.battle.responses,
+            //target: submission.target
         }
 
+        const result= await this.onNewEvent(event);
+
+        //if(result.aproved){
+            const eventResult = {
+                type: "makeResultQuiz",
+                title: 'Resultado del quiz',
+                message: result.message,
+                quiz_id: result.aproved ? this.battle.enemy.project_name : null,
+                project_id: result.aproved ? this.battle.enemy.quiz_id: null,
+                //target: submission.target
+            }
+            await this.onNewEvent(eventResult);
+        //}
 
 
         this.onExitBattle();

@@ -1,12 +1,15 @@
+import {  postCheckQuizProject } from "@/stores/api";
 import type { Behavior } from "../interfaces/Behavior";
 import type { Battle } from "./Battle";
 import { BattleAnimations } from "./BattleAnimations";
 import type { Combatant } from "./Combatant";
+import { LoadingQuiz } from "./LoadingQuiz";
 import { SubmissionQuiz } from "./SubmissionQuiz";
+import { SubmissionResultQuiz } from "./SubmissionResultQuiz";
 
 export class BattleEvent{
     battle: Battle;
-    event: Combatant;
+    event: any;
 
     constructor(event: Combatant, battle: Battle){
         this.battle= battle;
@@ -34,11 +37,48 @@ export class BattleEvent{
         
         const {question} = this.event; 
         const menu = new SubmissionQuiz({
-            question: question!,
+            quiz: question!,
             onComplete: (submission)=>{
                 //submission what move to use  who  to use it on
                 resolve(submission);
             }
+        });
+        menu.init(this.battle.element!);
+    }
+
+    makeResultQuiz(resolve: (arg: any)=>void){
+        
+        const {question} = this.event; 
+        const menu = new SubmissionResultQuiz({
+            title: this.event.title,
+            project_id: this.event.project_id,
+            quiz_id: this.event.quiz_id,
+            message: this.event.message,
+            onComplete: (submission: any)=>{
+                //submission what move to use  who  to use it on
+                resolve(submission);
+            }
+        });
+        menu.init(this.battle.element!);
+    }
+
+    loading(resolve: (arg: any)=>void){
+        
+        const {question} = this.event;
+        const menu = new LoadingQuiz({
+            ...this.event,
+            onComplete: (submission)=>{
+                //submission what move to use  who  to use it on
+                resolve(submission);
+            },
+            callBackLoading:  ()=>{
+                return  postCheckQuizProject({
+                    address: 'mi wallet',
+                    project_id: this.battle.enemy.project_name!,
+                    responses: this.event.responses,
+                });
+            }
+
         });
         menu.init(this.battle.element!);
     }

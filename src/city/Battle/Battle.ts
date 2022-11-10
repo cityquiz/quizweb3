@@ -1,3 +1,7 @@
+
+import type { ReponseQuiz } from "@/models/Inputs/CheckProjectInput";
+import type { Quiz } from "@/models/Quiz";
+import { getProjectQuizById } from "@/stores/api";
 import type { Behavior } from "../interfaces/Behavior";
 import type { Enemy } from "../interfaces/Enemy";
 import type { Question } from "../interfaces/Question";
@@ -18,9 +22,11 @@ export class Battle {
     combatants: any;
     activeCombatants: any;
     items: any[];
-    questions: Question[];
+    //questions: Question[];
+    quizes: Quiz[];
     usedInstanceIds: any;
     answers: any[];
+    responses: ReponseQuiz[];
 
     playerTeam?: Team;
     enemyTeam?: Team;
@@ -62,7 +68,8 @@ export class Battle {
         }); */
         
         this.items= config.enemy.questions;
-        this.questions= config.enemy.questions;
+        debugger
+        this.quizes= [];// config.enemy.questions;
 
 
         //load items
@@ -71,6 +78,7 @@ export class Battle {
         this.usedInstanceIds = {};
 
         this.answers=[];
+        this.responses=[];
 
     }
 
@@ -101,9 +109,15 @@ export class Battle {
         `);
     }
 
-    init(container: HTMLDivElement){
+    async init(container: HTMLDivElement){
         this.createElement();
         container.appendChild(this.element!);
+        debugger
+        if(this.enemy.project_id){
+            const quiz= await getProjectQuizById(this.enemy.project_id);
+            
+            this.quizes= quiz.quizes!;
+        }
 
         //iniziamos con la obtencion del wallet id para identificar el player y el profesor
         this.playerTeam = new Team("player", "Hero");

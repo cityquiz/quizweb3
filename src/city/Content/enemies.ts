@@ -7,6 +7,7 @@ export const Enemies = new Map<string, Enemy>()
         src: "/assets/images/characters/people/erio.png",
         quiz_id:1,
         quiz_name:'Arquitectura Polkadot y Kusama',
+        project_id: "1",
         project_name:'Polkadot',
         questions:[
             {
@@ -42,7 +43,7 @@ export const Enemies = new Map<string, Enemy>()
 
                 ]
             },
-            {
+            /* {
                 id:"4",
                 question: "Completa la frase: Kusama viene siendo una...",
                 response_correct_id: "a4",
@@ -125,7 +126,7 @@ export const Enemies = new Map<string, Enemy>()
                     { response: "Change, Action, Execution", id: "a4" },
 
                 ]
-            },                                                                                    
+            }, */                                                                                    
         ]
     })
     .set("beth",

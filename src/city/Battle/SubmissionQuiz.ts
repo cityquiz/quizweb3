@@ -1,20 +1,21 @@
+import type { Quiz } from "@/models/Quiz";
 import type { Question } from "../interfaces/Question";
 import { KeyboardMenu } from "../KeyboardMenu";
 
 
 interface ResponseQuizComplete{
     play?: boolean;
-    questionId?: string;
+    questionId?: number;
     responseId?: string;
 }
 interface ConfigSubmissionQuiz{
-    question: Question;
+    quiz: Quiz;
     onComplete: (args: ResponseQuizComplete)=>void;
 }
 
 
 export class SubmissionQuiz implements ConfigSubmissionQuiz{
-    question: Question;
+    quiz: Quiz;
     onComplete: (args: ResponseQuizComplete) => void;
 
     element?: HTMLDivElement;
@@ -23,7 +24,7 @@ export class SubmissionQuiz implements ConfigSubmissionQuiz{
     
     constructor(config: ConfigSubmissionQuiz){
         
-        this.question= config.question;
+        this.quiz= config.quiz;
         
         this.onComplete = config.onComplete;
 
@@ -41,19 +42,20 @@ export class SubmissionQuiz implements ConfigSubmissionQuiz{
             }
         }
 
-        if(this.question){
-            return this.question.options.map(opt=>{
+        if(this.quiz){
+            //return this.question.options.map(opt=>{
+                return this.quiz.questions.map(opt=>{
                 return {
-                    label: opt.response,
-                    description: opt.response,
+                    label: opt.question,
+                    description: '',
                     handler:()=>{
                         /* this.caster.answers.push({
                             questionId: this.items[index].id,
                             responseId: opt.id
                         }); */
                          this.onComplete({
-                            questionId: this.question.id,
-                            responseId: opt.id,
+                            questionId: this.quiz.id,
+                            responseId: opt.id!,
                         }) 
                         console.log(opt.id)
                     }
@@ -97,8 +99,8 @@ export class SubmissionQuiz implements ConfigSubmissionQuiz{
     }
 
     getTitle(){
-        const {question} = this.question;
-        return question;
+        const {name} = this.quiz;
+        return name;
     }
 
     createElement(){
@@ -117,11 +119,16 @@ export class SubmissionQuiz implements ConfigSubmissionQuiz{
         });
         this.keyboardMenu.init(this.element!);
         this.keyboardMenu.setOptions(this.getPages());
-        if(this.question){
+        if(this.quiz){
             
             this.keyboardMenu.setTitle(this.getTitle());
         }
         
+        const last= container.querySelector(".QuizMenu");
+        
+        if(last){
+            container.removeChild(last);
+        }
 
         container.appendChild(this.element!);
     }

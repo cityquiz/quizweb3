@@ -23,7 +23,8 @@ export const useWallet = defineStore('city/wallet', {
   state: (): State => ({
     user: {
       //username: null,
-      address: null
+      address: null,
+      nftids:[]
     },
     nftContract: undefined,
     loading: false,
@@ -123,11 +124,18 @@ export const useWallet = defineStore('city/wallet', {
         const signer= await getSigner();
         const signerContract= new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
         
-        const txMint= await signerContract.mint(this.user.address, "1","2");
         
-        const txId= await txMint.wait();
+        
+
+        const txMint= ()=>signerContract.mint(this.user.address, "1","2");
+        
+        //const txId= await txMint.wait();
         //console.log(txId);
-        console.log(txId);
+        return {signerContract, txMint};
+
+        //const txId= await txMint.wait();
+        //console.log(txId);
+        //console.log(txId);
         //return {signerContract, txMint};
         
     },
@@ -135,6 +143,7 @@ export const useWallet = defineStore('city/wallet', {
 
     async getUri(){
       const signer= await getSigner();
+      debugger
       const signerContract= new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
       const txUri= await signerContract.tokenURI("1");
       //const txId= await txUri.wait();

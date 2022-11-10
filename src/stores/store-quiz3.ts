@@ -6,6 +6,7 @@ import type { Project } from '@/models/Project';
 
 import { defineStore } from 'pinia'
 import { getProjects, postProject } from './api';
+import { useWallet } from './store-wallet';
 
 
 
@@ -131,6 +132,11 @@ export const useQuiz = defineStore('city/quiz', {
       this.openQuiz=false;
       this.openQuestions=false;
       this.openAnswers=false;
+
+      if(this.openBag){
+        const store= useWallet();
+        store.getUri()
+      }
     },
     toggleQuiz(){
       this.openProjects=false;

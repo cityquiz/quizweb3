@@ -6,7 +6,7 @@ import { TextMessage } from "./TextMessage";
 import { utils } from "./utils";
 import { Battle } from "./Battle/Battle";
 import { Enemies } from "./Content/enemies";
-import { getQuizById } from "@/stores/api";
+//import { getProjectQuizById } from "@/stores/api";
 
 interface ConfigOverWorldMap{
     map: OverWorldMap;
@@ -110,13 +110,13 @@ export class OverworldEvent{
 
     async battle(resolve:() => void){
         const enemy = Enemies.get(this.event.enemyId!)!;
-        if(enemy.quiz_id){
+        /* if(enemy.quiz_id){
              await getQuizById(enemy.quiz_id!).then(res=>{
-                debugger
+                
                 console.log(res);
                 //enemy.questions=res;
              });
-        }
+        } */
         const battle = new Battle({
             enemy: enemy,
             onComplete: ()=>{

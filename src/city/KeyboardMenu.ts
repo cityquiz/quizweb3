@@ -10,6 +10,7 @@ export interface MenuOption{
 
 interface ConfigKeyboard{
     descriptionContainer?: HTMLDivElement;
+    css?: string;
 }
 export class KeyboardMenu{
     element?: HTMLDivElement;
@@ -22,6 +23,7 @@ export class KeyboardMenu{
     up: KeyPressedListener | null;
     down: KeyPressedListener | null;
     prevFocus: HTMLButtonElement | null;
+    css?:string;
 
     constructor(config: ConfigKeyboard){
         this.options= []; //set by updater method
@@ -29,6 +31,7 @@ export class KeyboardMenu{
         this.down = null;
         this.prevFocus = null;
         this.descriptionContainer = config.descriptionContainer || null;
+        this.css= config.css;
     }
 
 
@@ -37,6 +40,7 @@ export class KeyboardMenu{
         this.element!.innerHTML = this.options.map((option, index)=>{
             const disabledAttr =  option.disabled ? "disabled" : "";
 
+            
 
             const autoFocusAttr: string = index ===0 ? "autoFocus" : "";
             return (`
@@ -80,6 +84,9 @@ export class KeyboardMenu{
     createElement(){
         this.element=document.createElement("div");
         this.element.classList.add("KeyboardMenu");
+        if(this.css){
+            this.element.classList.add("space-evenly");
+        }
 
         //description box element
         this.descriptionElement= document.createElement("div");
@@ -104,22 +111,42 @@ export class KeyboardMenu{
         (this.descriptionContainer || container).appendChild(this.descriptionElement!);
         container.appendChild(this.element!);
         
-        this.up = new KeyPressedListener("ArrowUp", ()=>{
-            const current = Number(this.prevFocus!.getAttribute("data-button"));
-            const prevButton = Array.from(this.element!.querySelectorAll<HTMLButtonElement>("button[data-button]")).reverse().find((el)=>{
-                return Number(el.dataset.button) < current && !el.disabled;
+        if(this.css){
+            this.up = new KeyPressedListener("ArrowLeft", ()=>{
+                const current = Number(this.prevFocus!.getAttribute("data-button"));
+                const prevButton = Array.from(this.element!.querySelectorAll<HTMLButtonElement>("button[data-button]")).reverse().find((el)=>{
+                    return Number(el.dataset.button) < current && !el.disabled;
+                });
+
+                prevButton?.focus();
             });
 
-            prevButton?.focus();
-        });
+            this.down = new KeyPressedListener("ArrowRight", ()=>{
+                const current = Number(this.prevFocus!.getAttribute("data-button"));
+                const nextButton = Array.from(this.element!.querySelectorAll<HTMLButtonElement>("button[data-button]")).find((el)=>{
+                    return Number(el.dataset.button) > current && !el.disabled;
+                });
+                nextButton?.focus();
 
-        this.down = new KeyPressedListener("ArrowDown", ()=>{
-            const current = Number(this.prevFocus!.getAttribute("data-button"));
-            const nextButton = Array.from(this.element!.querySelectorAll<HTMLButtonElement>("button[data-button]")).find((el)=>{
-                return Number(el.dataset.button) > current && !el.disabled;
             });
-            nextButton?.focus();
+        }else{
+            this.up = new KeyPressedListener("ArrowUp", ()=>{
+                const current = Number(this.prevFocus!.getAttribute("data-button"));
+                const prevButton = Array.from(this.element!.querySelectorAll<HTMLButtonElement>("button[data-button]")).reverse().find((el)=>{
+                    return Number(el.dataset.button) < current && !el.disabled;
+                });
 
-        });
+                prevButton?.focus();
+            });
+
+            this.down = new KeyPressedListener("ArrowDown", ()=>{
+                const current = Number(this.prevFocus!.getAttribute("data-button"));
+                const nextButton = Array.from(this.element!.querySelectorAll<HTMLButtonElement>("button[data-button]")).find((el)=>{
+                    return Number(el.dataset.button) > current && !el.disabled;
+                });
+                nextButton?.focus();
+
+            });
+        }
     }
 }

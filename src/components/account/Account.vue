@@ -50,6 +50,8 @@ const handlerProjects = ()=>{
 
 const handlerBag = ()=>{
   storeQuiz.toggleBag();
+  handlerClaim();
+  
 }
 
 

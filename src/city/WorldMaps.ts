@@ -149,8 +149,9 @@ const stopNpcB=[
         events: [
             { who: "npcB", type: "walk", direction: "left"},
             { who: "npcB", type: "stand", direction: "up", time: 500},
-            { type: "textMessage", text: "Hey tú, ¿dónde vas? ¡aún no pasastes el examen!" },
+            { type: "textMessage", text: "Hei tu, donde vas, aun no pasastes el examen!" },
             { who: "npcB", type: "walk", direction: "right" },
+
             { who: "hero", type: "walk", direction: "down"},
             { who: "hero", type: "walk", direction: "down"},
             { who: "hero", type: "walk", direction: "down"},
@@ -167,13 +168,14 @@ const stopNpcB=[
         .set("hero", new Person({
             x:utils.widthGrid(11),
             y:utils.widthGrid(14),
+
             /* x:utils.widthGrid(16),
             y:utils.widthGrid(13.5), */
             isPlayerControlled: true,
         }))
         .set("npcA",new Person({
-            x:utils.widthGrid(20),
-            y:utils.widthGrid(12),
+            x:utils.widthGrid(10),
+            y:utils.widthGrid(6),
             src: "/assets/images/characters/people/npc1.png",
             behaviorLoop: [
                 { type: "stand", direction: Direction.left, time: 4800 },
@@ -183,7 +185,7 @@ const stopNpcB=[
             ],
             talking: [
                
-                        { type: "textMessage", text: "¡Listo para ser evaluado!", faceHero: "npcA" },
+                        { type: "textMessage", text: "Listo para ser evaluado!", faceHero: "npcA" },
                         //{ type: "textMessage", text: "hi forastero" },
                         { type: "battle", enemyId: "beth" },
                         //{ who: "hero", type: "stand", direction: "right" }
@@ -196,12 +198,12 @@ const stopNpcB=[
             ]
         },))
         .set("npcB",new Person({
-            x:utils.widthGrid(32),
-            y:utils.widthGrid(10),
+            x:utils.widthGrid(16),
+            y:utils.widthGrid(5),
             src: "/assets/images/characters/people/erio.png",
             talking: [
                 
-                        { type: "textMessage", text: "¡Hola, busca un edificio para completar un quiz y conseguir NFTs!", faceHero: "npcB"},
+                { type: "textMessage", text: "¡Hola, busca un edificio para completar un quiz y conseguir NFTs!", faceHero: "npcB"},
                         //{ type: "textMessage", text: "hi forastero" },
                         { type: "battle", enemyId: "erio" },
                         //{ who: "hero", type: "stand", direction: "right" }
@@ -253,7 +255,6 @@ const stopNpcB=[
                 ]
             },),
         }, */
-
         walls: {
             // BORDER IMAGEN:
             // LADO IZQ
