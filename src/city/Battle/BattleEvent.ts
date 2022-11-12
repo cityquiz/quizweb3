@@ -1,4 +1,5 @@
 import {  postCheckQuizProject } from "@/stores/api";
+import { useWallet } from "@/stores/store-wallet";
 import type { Behavior } from "../interfaces/Behavior";
 import type { Battle } from "./Battle";
 import { BattleAnimations } from "./BattleAnimations";
@@ -72,9 +73,11 @@ export class BattleEvent{
                 resolve(submission);
             },
             callBackLoading:  ()=>{
+                const store = useWallet();
+                const addres= store.user.address;
                 return  postCheckQuizProject({
-                    address: 'mi wallet',
-                    project_id: this.battle.enemy.project_name!,
+                    address: addres!,
+                    project_id: this.battle.enemy.project_id!,
                     responses: this.event.responses,
                 });
             }

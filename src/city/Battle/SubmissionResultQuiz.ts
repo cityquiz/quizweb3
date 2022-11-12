@@ -68,7 +68,7 @@ export class SubmissionResultQuiz implements ConfigSubmissionQuiz{
                     }); 
                 }); */
                 const wallet = await store.mintContract721();
-                debugger
+                
                 if(wallet){
                     wallet.signerContract.on("Transfer",(from, to, tokenId: BigNumber) => {
                       const token=  tokenId.toBigInt().toString();
@@ -81,7 +81,7 @@ export class SubmissionResultQuiz implements ConfigSubmissionQuiz{
                         }); 
                            
                     });
-                    debugger
+                    
                     const txMint =await wallet.txMint();
                     const tx= await txMint.wait();
                     console.log(tx.transactionHash);
@@ -91,7 +91,7 @@ export class SubmissionResultQuiz implements ConfigSubmissionQuiz{
                 
             }
         } 
-        debugger;
+        
             if(this.project_id && this.quiz_id){
                 return [
                     exitOption,

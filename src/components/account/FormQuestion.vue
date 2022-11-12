@@ -27,7 +27,7 @@ import Modal from "./Modal.vue";
 const storeQuiz = useQuiz();
 const showModal= computed(()=>storeQuiz.showFormQuestion);
 const dataQuestion = computed(()=>{
-    debugger
+    
     return storeQuiz.getQuestion;
 });
 

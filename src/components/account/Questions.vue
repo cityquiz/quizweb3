@@ -46,7 +46,7 @@ const pregunta= computed(()=>store.getQuiz);
 
 
 const editQuestion=(id?:number)=>{
-    debugger
+    
     store.selectQuestion(id);
     store.showQuestion(true);
     //store.toggleQuestions();

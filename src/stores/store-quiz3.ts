@@ -8,7 +8,7 @@ import type { Quiz } from '@/models/Quiz';
 //import { initializeProvider } from '@metamask/providers';
 
 import { defineStore } from 'pinia'
-import { getProjects, postProject, postQuestion, postQuiz } from './api';
+import { getProjects, postAnswer, postProject, postQuestion, postQuiz } from './api';
 import { useWallet } from './store-wallet';
 
 
@@ -119,10 +119,16 @@ export const useQuiz = defineStore('city/quiz', {
         alert("Elija un projecto!");
         return;
       }
-      debugger
+      
       if(id!=null){
         this.project.quiz = this.project!.quizes!.find(item=>item.id==id);
-        
+        if(!this.project.quiz!.answer){
+          this.project.quiz!.answer = {
+            id:0,
+            quiz_id: this.project.quiz!.id!,
+            name:''
+          }
+        }
         console.log(this.project);
       }else{
         this.project.quiz={
@@ -170,6 +176,20 @@ export const useQuiz = defineStore('city/quiz', {
     clearQuestion(){
       if(this.project?.quiz?.question){
         this.project.quiz.question=undefined;
+      }
+    },
+
+
+    registerAnswer(){
+      if(this.project?.quiz?.answer){
+        const question_id = this.project.quiz.answer.id;
+        const quiz_id = this.project.quiz.id;
+        postAnswer({question_id: question_id!, quiz_id:quiz_id!}).then((res:Question)=>{
+          this.project!.quiz!.answer=res;
+          
+          console.log(res)
+          //this.project!.quiz!.questions!.push(res);
+        });
       }
     },
 

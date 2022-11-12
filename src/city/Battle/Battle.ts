@@ -68,7 +68,7 @@ export class Battle {
         }); */
         
         this.items= config.enemy.questions;
-        debugger
+        
         this.quizes= [];// config.enemy.questions;
 
 
@@ -112,7 +112,7 @@ export class Battle {
     async init(container: HTMLDivElement){
         this.createElement();
         container.appendChild(this.element!);
-        debugger
+        
         if(this.enemy.project_id){
             const quiz= await getProjectQuizById(this.enemy.project_id);
             

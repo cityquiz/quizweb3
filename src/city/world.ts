@@ -126,12 +126,12 @@ export class Overworld {
         //agregamos los hud en el mapa
         this.hud = new Hud(user.value.username); 
         this.hud.init(document.querySelector(".game-container")!);
-
-        watch(user,(newUser)=>{
-            debugger
-            this.hud?.setUsername(newUser.username!);
-            this.hud?.createElement();
-        })
+        
+        //watch(user,(newUser)=>{
+            
+        this.hud?.setUsername(user.value.username!);
+        this.hud?.createElement();
+        //})
   
 
         this.startMap((window as any).OverWorldMap.DemoRoom);

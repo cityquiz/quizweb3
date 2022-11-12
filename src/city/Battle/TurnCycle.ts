@@ -45,7 +45,7 @@ export class TurnCycle implements ConfigTurnCycle{
         const questionsEvents = this.battle.quizes;
         
         for(let i=0; i<questionsEvents.length; i++){
-            debugger;
+            
             const event = {
                 type: "makeToQuestion",
                 question: questionsEvents[i],

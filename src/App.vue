@@ -1,7 +1,7 @@
 <template>
 
-  <Register v-if="isConnected"></Register>
-  <Game v-if="user.username"></Game>
+  <Register v-if="!isConnected"></Register>
+  <Game v-if="user?.username"></Game>
 <!--   <header>
     
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />

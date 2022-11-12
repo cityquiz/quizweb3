@@ -1,5 +1,4 @@
 export interface AnswerInput{
     question_id: number;
-    answer: string;
-    valid: boolean;
+    quiz_id: number;
   }

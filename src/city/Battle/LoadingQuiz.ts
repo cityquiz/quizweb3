@@ -69,8 +69,8 @@ export class LoadingQuiz implements ConfigLoadingQuiz{
         container.appendChild(this.element!);
 
         this.callBackLoading().then(res=>{
-            debugger
-
+            
+            
             console.log("evaluo la respuesta del server");
             this.onComplete({
                 message: 'messagio provado',//res.message,

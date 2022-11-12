@@ -5,8 +5,8 @@ import { KeyboardMenu } from "../KeyboardMenu";
 
 interface ResponseQuizComplete{
     play?: boolean;
-    questionId?: number;
-    responseId?: string;
+    quiz_id?: number;
+    answer_id?: number;
 }
 interface ConfigSubmissionQuiz{
     quiz: Quiz;
@@ -54,8 +54,8 @@ export class SubmissionQuiz implements ConfigSubmissionQuiz{
                             responseId: opt.id
                         }); */
                          this.onComplete({
-                            questionId: this.quiz.id,
-                            responseId: opt.id!,
+                            quiz_id: this.quiz.id,
+                            answer_id: opt.id!,
                         }) 
                         console.log(opt.id)
                     }

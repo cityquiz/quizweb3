@@ -97,7 +97,7 @@ export class OverworldEvent{
     changeMap(resolve:() => void){
         const sceneTransition =  new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container")!,()=>{
-            debugger
+            
             this.map.overworld.startMap((window as any).OverWorldMap[this.event.map!]);
             resolve();
 

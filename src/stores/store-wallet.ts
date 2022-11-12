@@ -7,6 +7,7 @@ import { defineStore } from 'pinia'
 
 
 import { NFT_ABI, NFT_ADDRESS } from '../abis/Nft';
+import { postLoginUser, postRegister } from './api';
 import { decodeImageByBase64, getProvider, getSigner } from './utils-eth';
 
 
@@ -23,8 +24,8 @@ export const useWallet = defineStore('city/wallet', {
   state: (): State => ({
     user: {
       //username: null,
-      address: null,
-      nftids:[]
+      //address: null,
+      nfts:[]
     },
     nftContract: undefined,
     loading: false,
@@ -35,7 +36,15 @@ export const useWallet = defineStore('city/wallet', {
   getters: {
     getUser: (state) => state.user,
     isLoading: (state) => state.loading,
-    isConnected: (state) => !!!state.user.address && !!!state.user.username,
+    isConnected: (state) => {
+      //const address =state.user.address; 
+      const username = state.user.username;
+      
+      //const swa=!!!address;
+      const swu=!!username;
+      
+      return  swu;
+    },
   },
   actions: {
     async initProvider() {
@@ -64,25 +73,41 @@ export const useWallet = defineStore('city/wallet', {
     async register(username: string| null) {
       await this.initProvider()
       
-      debugger
+      
       if(this.user.address && username){
-        this.user.username= username;
-        localStorage.setItem("username",username);
-        localStorage.setItem("address",this.user.address);
+        //this.user.username= username;
+        await postRegister({username,address: this.user.address}).then((res)=>{
+          this.user= res;
+          localStorage.setItem("address",this.user.address!);
+        })
+        /* localStorage.setItem("username",username);
+        localStorage.setItem("address",this.user.address); */
       }
     },
 
     initStorage(){
       
-      const username=localStorage.getItem("username");
+      //const username=localStorage.getItem("username");
       const address = localStorage.getItem("address");
       
-      if(username){
-        this.user.username = username;
-      }
       if(address){
-        this.user.address = address;
+        postLoginUser(address).then((res)=>{
+          if(res.message){
+            localStorage.removeItem("address");
+            alert(res.message);  
+          }else{
+            
+            this.user=res;
+            
+            localStorage.setItem("address",this.user.address!);
+          }
+            
+        }).catch(err=>{
+          
+          localStorage.removeItem("address");
+        });
       }
+      
     },
 
 

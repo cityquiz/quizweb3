@@ -1,6 +1,6 @@
 export interface ReponseQuiz{
-    questionId: string;
-    responseId: string;
+    quiz_id: number;
+    answer_id: number;
 }
 export interface CheckProjectInput{
     address: string;

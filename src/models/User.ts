@@ -1,6 +1,7 @@
-export interface User{
-    address: string | null;
-    username?: string;
+import type { Nft } from "./Nft";
 
-    nftids: string[]
+export interface User{
+    address?: string ;
+    username?: string;
+    nfts: Nft[];
 }

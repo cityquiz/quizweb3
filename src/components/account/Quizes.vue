@@ -9,7 +9,7 @@
                 <td colspan="2" ><FormQuiz></FormQuiz> <button @click="editQuiz()" class="btn-add">Add</button> </td>
             </tr>
             <tr v-for="item of quizes" :key="item.id">
-                <td>{{item.name}}</td>
+                <td>{{item.name}}  <span v-if="item.answer"> (  {{item.answer.name}})</span></td>
                 <td>
                     <button @click="editQuiz(item.id)" class="btn-add">ver</button>
                     <button @click="viewQuestions(item.id!)" class="btn-add">Opciones</button>
@@ -29,13 +29,13 @@ const quizes = computed(()=>store.getQuizes);
 
 
 const editQuiz=(id:number|null=null)=>{
-    debugger
+    
     store.selectQuiz(id);
     store.showQuiz(true);
 }
 
 const viewQuestions=(id:number)=>{
-    debugger
+    
     store.selectQuiz(id);
     store.toggleQuestions();
 }

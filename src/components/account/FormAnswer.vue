@@ -7,7 +7,7 @@
             <div class="form-input">
                 <label for="name-answer"> {{dataQuiz!.name}}</label>
                 
-                <select v-model="dataQuiz!.answer_id">
+                <select v-model="dataQuiz!.answer!.id">
                     <option v-for="item of dataQuiz!.questions" :key="item.id" :value="item.id">{{item.name}}</option>
                     
                 </select>
@@ -17,7 +17,7 @@
 
         <div class="footer">
             <button @click="handlerShowModal(false)">Close</button>
-            <button >Guardar</button>
+            <button @click="handlerSave">Guardar</button>
         </div>
     </Modal>
         
@@ -42,6 +42,12 @@ const handlerShowModal=(show: boolean)=>{
     } */
     storeQuiz.showAnswer(show);
 }
+
+const handlerSave=()=>{
+    storeQuiz.registerAnswer();
+}
+
+
 
 </script>
 

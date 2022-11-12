@@ -8,4 +8,5 @@ export interface Enemy{
     name: string;
     src: string;
     questions: Question[];
+    options?: any[];
 }

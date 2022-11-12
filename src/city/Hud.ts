@@ -41,16 +41,17 @@ export class Hud{
     createElement(){
         
 
-        if(this.element ){
+        /* if(this.element ){
             this.element.remove();
-        }
+        } */
         this.element= document.createElement("div");
         
         this.element.classList.add("Hud");
-
+        this.element.innerHTML=(``);
+        createApp(Account).mount(this.element);
 
         //const {playerState} = window;
-        if(this.username){
+        //if(this.username){
             /* const vnode = h('button', {
                 onClick: withModifiers(() => {
                   alert("Hola manito")
@@ -67,10 +68,10 @@ export class Hud{
                 }
               } */
               
-            this.element.innerHTML=(`
+            /* this.element.innerHTML=(`
                 <p class="Combatant_name">${this.username}</p>
                 
-                `);
+                `); */
                 
                 /* <p class="Combatant_level"></p>
                 <svg viewBox="0 0 26 2" class="Combatant_xp-container">
@@ -78,10 +79,10 @@ export class Hud{
                     <rect x="0" y="1" width="0%" height="1" fill="#ffc934" />
                 </svg>
                 <p class="Combatant_status"></p> */
-                createApp(Account).mount(this.element);
-        }else{
+                //createApp(Account).mount(this.element);
+        /* }else{
             this.element.innerHTML=(``);
-        }
+        } */
         
         
 
@@ -97,7 +98,7 @@ export class Hud{
         container.appendChild(this.element!);
 
         document.addEventListener("PlayerStateUpdated", ()=>{
-            debugger;
+            
             this.update();
         });
         /*

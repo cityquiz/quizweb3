@@ -10,7 +10,7 @@ export const Enemies = new Map<string, Enemy>()
         project_id: "1",
         project_name:'Polkadot',
         questions:[
-            {
+            /* {
                 id:"1",
                 name: "¿Cuándo fue fundada la red de Polkadot?",
                 response_correct_id: "a1",
@@ -42,7 +42,7 @@ export const Enemies = new Map<string, Enemy>()
                     { response: "Leased proof of stake", id: "a4" },
 
                 ]
-            },
+            }, */
             /* {
                 id:"4",
                 question: "Completa la frase: Kusama viene siendo una...",
@@ -137,7 +137,7 @@ export const Enemies = new Map<string, Enemy>()
         quiz_name:'Substrate of Polkadot',
         project_name:'Polkadot',
         questions:[
-            {
+            /* {
                 id:"1",
                 name: "¿Qué es Substrate dentro de Polkadot?",
                 response_correct_id: "a1",
@@ -255,7 +255,7 @@ export const Enemies = new Map<string, Enemy>()
                     { response: "DOT", id: "a4" },
 
                 ]
-            },                                                                                             
+            }, */                                                                                             
         ]
     })
     
