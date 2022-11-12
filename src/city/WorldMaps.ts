@@ -617,6 +617,13 @@ const stopNpcB=[
         cutsceneSpaces: {
             [utils.asGridCoord(31,9)]: stopNpcB,
             [utils.asGridCoord(30,9)]: stopNpcB,
+            [utils.asGridCoord(17,11)]:[
+                {
+                    events: [
+                        { type: "changeMap", map: "Kitchen"}
+                    ]
+                }
+            ],
             [utils.asGridCoord(18,11)]:[
                 {
                     events: [
@@ -624,13 +631,7 @@ const stopNpcB=[
                     ]
                 }
             ],
-            [utils.asGridCoord(17,11)]:[
-                {
-                    events: [
-                        { type: "changeMap", map: "Kitchen"}
-                    ]
-                }
-            ]            
+                  
         }
     },
     Kitchen:{
@@ -640,7 +641,7 @@ const stopNpcB=[
         upperSrc: "/assets/images/maps/KitchenUpper.png",
         gameObjects: new Map<string, GameObject>()
         .set("hero",new Person({
-            x:utils.widthGrid(16),
+            x:utils.widthGrid(15),
             y:utils.widthGrid(6),
             isPlayerControlled: true,
         }))
