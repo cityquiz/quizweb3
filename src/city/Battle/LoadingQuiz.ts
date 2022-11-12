@@ -70,10 +70,12 @@ export class LoadingQuiz implements ConfigLoadingQuiz{
 
         this.callBackLoading().then(res=>{
             debugger
+
+            console.log("evaluo la respuesta del server");
             this.onComplete({
-                message: 'Ha aprovado el quiz con exito',
+                message: 'messagio provado',//res.message,
                 loading:false,
-                aproved:true
+                aproved: false//res.aproved
             });
         })
 

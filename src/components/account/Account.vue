@@ -1,17 +1,17 @@
 <template>
     <div class="container-account">
        <button @click="handlerBag">{{user.username}} </button>
-       <button @click="handlerProjects"  >Projects </button>
-       <button @click="handlerQuiz">Quiz </button>
-       <button @click="handlerQuestion">Questions </button>
-       <button @click="handlerAnswer">Answers </button>
+       <button @click="handlerProjects"  >NPC </button>
+       <button @click="handlerQuiz">Preguntas </button>
+       <button @click="handlerQuestion">Opciones </button>
+       <!-- <button @click="handlerAnswer">Answers </button> -->
        <img v-if="uriNft" :src="uriNft" alt="">
     </div>
     <Bag v-if="openBag"></Bag>
-    <Projects v-if="openProjects"></Projects>
-    <Quizes v-if="openQuiz"></Quizes>
-    <Questions v-if="openQuestions"></Questions>
-    <Answers v-if="openAnswers"></Answers>
+    <Projects v-if="openProjects" :key="'npc'"></Projects>
+    <Quizes v-if="openQuiz" :key="'qu'"></Quizes>
+    <Questions v-if="openQuestions" :key="'questions'"></Questions>
+    <Answers v-if="openAnswers" :key="'respuesta'"></Answers>
     
         
     

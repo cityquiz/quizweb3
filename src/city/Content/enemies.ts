@@ -12,7 +12,7 @@ export const Enemies = new Map<string, Enemy>()
         questions:[
             {
                 id:"1",
-                question: "¿Cuándo fue fundada la red de Polkadot?",
+                name: "¿Cuándo fue fundada la red de Polkadot?",
                 response_correct_id: "a1",
                 options: [
                     { response: "2017", id: "a1" },
@@ -24,7 +24,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"2",
-                question: "¿La red de Polkadot funciona de manera fragmentada?",
+                name: "¿La red de Polkadot funciona de manera fragmentada?",
                 response_correct_id: "a1",
                 options: [
                     { response: "Verdadero", id: "a1" },
@@ -33,7 +33,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"3",
-                question: "¿Cuál es el protocolo de consenso para la Blockchain de Polkadot?",
+                name: "¿Cuál es el protocolo de consenso para la Blockchain de Polkadot?",
                 response_correct_id: "a3",
                 options: [
                     { response: "Proof of work", id: "a1" },
@@ -139,7 +139,7 @@ export const Enemies = new Map<string, Enemy>()
         questions:[
             {
                 id:"1",
-                question: "¿Qué es Substrate dentro de Polkadot?",
+                name: "¿Qué es Substrate dentro de Polkadot?",
                 response_correct_id: "a1",
                 options: [
                     { response: "Una herramienta", id: "a1" },
@@ -151,7 +151,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"2",
-                question: "¿Cuáles son los 2 beneficios que trae Substrate a la red Polkadot?",
+                name: "¿Cuáles son los 2 beneficios que trae Substrate a la red Polkadot?",
                 response_correct_id: "a1",
                 options: [
                     { response: "Concentración y enfoque", id: "a1" },
@@ -162,7 +162,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"3",
-                question: "¿Con qué blockchains posee Polkadot puentes de conexión?",
+                name: "¿Con qué blockchains posee Polkadot puentes de conexión?",
                 response_correct_id: "a1",
                 options: [
                     { response: "Bitcoin y Ethereum", id: "a1" },
@@ -174,7 +174,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"4",
-                question: "¿Qué evitan las actualizaciones dentro de la propia cadena de Polkadot?",
+                name: "¿Qué evitan las actualizaciones dentro de la propia cadena de Polkadot?",
                 response_correct_id: "a4",
                 options: [
                     { response: "Comunidad dividida", id: "a1" },
@@ -186,7 +186,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"5",
-                question: "¿Qué proyecto es de Polkadot?",
+                name: "¿Qué proyecto es de Polkadot?",
                 response_correct_id: "a1",
                 options: [
                     { response: "Moonbeam", id: "a1" },
@@ -198,7 +198,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"6",
-                question: "¿Qué red debo usar para depositar DOT en mi wallet?",
+                name: "¿Qué red debo usar para depositar DOT en mi wallet?",
                 response_correct_id: "a3",
                 options: [
                     { response: "Red ethereum", id: "a1" },
@@ -210,7 +210,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"7",
-                question: "¿Cuál es el mínimo de DOTs que debo tener para tener activo mi wallet?",
+                name: "¿Cuál es el mínimo de DOTs que debo tener para tener activo mi wallet?",
                 response_correct_id: "a2",
                 options: [
                     { response: "Nada", id: "a1" },
@@ -222,7 +222,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"8",
-                question: "En lugar de competir con otras cadenas, Polkadot busca:",
+                name: "En lugar de competir con otras cadenas, Polkadot busca:",
                 response_correct_id: "a2",
                 options: [
                     { response: "Cambiar su red", id: "a1" },
@@ -234,7 +234,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"9",
-                question: "¿Polkadot es una red que conecta soluciones de qué tipo de capa?",
+                name: "¿Polkadot es una red que conecta soluciones de qué tipo de capa?",
                 response_correct_id: "a3",
                 options: [
                     { response: "Capa universal", id: "a1" },
@@ -246,7 +246,7 @@ export const Enemies = new Map<string, Enemy>()
             },
             {
                 id:"10",
-                question: "¿Cuál es el nombre del Token oficial dentro de la red de Polkadot?",
+                name: "¿Cuál es el nombre del Token oficial dentro de la red de Polkadot?",
                 response_correct_id: "a4",
                 options: [
                     { response: "Ether", id: "a1" },

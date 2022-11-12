@@ -5,14 +5,14 @@
         <p>Question</p>
         <div class="form-controls">
             <div class="form-input">
-                <label for="name-project">Name</label>
-                <input type="text" class="input-form">
+                <label for="name-question">Name</label>
+                <input type="text" v-model="dataQuestion!.name" class="input-form">
             </div>
         </div>
 
         <div class="footer">
-            <button @click="showModal=false">Close</button>
-            <button >Guardar</button>
+            <button @click="handlerShowModal(false)">Close</button>
+            <button v-if="dataQuestion?.id==undefined" @click="handlerSave()">Guardar</button>
         </div>
     </Modal>
         
@@ -20,15 +20,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useQuiz } from "@/stores/store-quiz3";
+import { computed, ref } from "vue";
 import Modal from "./Modal.vue";
 
-const showModal = ref(false);
+const storeQuiz = useQuiz();
+const showModal= computed(()=>storeQuiz.showFormQuestion);
+const dataQuestion = computed(()=>{
+    debugger
+    return storeQuiz.getQuestion;
+});
 
 const handlerShowModal=(show: boolean)=>{
-    //console.log('handler:',show);
-    showModal.value=show;
+    
+    if(!show){
+        storeQuiz.clearQuestion();
+    }
+    storeQuiz.showQuestion(show);
 }
+
+const handlerSave=()=>{
+    storeQuiz.registerQuestion();
+}
+
+
 
 </script>
 

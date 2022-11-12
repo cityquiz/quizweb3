@@ -21,7 +21,7 @@
                 <td>{{item.description}}</td>
                 <td>
                     <button @click="editProject(item.id)" class="btn-add">Ver</button>
-                    <button @click="viewQuizes(item.id!)" class="btn-add">Quizes</button>
+                    <button @click="viewQuizes(item.id!)" class="btn-add">Preguntas</button>
                 </td>
             </tr>
         </table>

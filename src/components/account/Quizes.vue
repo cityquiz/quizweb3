@@ -12,7 +12,7 @@
                 <td>{{item.name}}</td>
                 <td>
                     <button @click="editQuiz(item.id)" class="btn-add">ver</button>
-                    <button @click="viewQuestions(item.id!)" class="btn-add">Questions</button>
+                    <button @click="viewQuestions(item.id!)" class="btn-add">Opciones</button>
                 </td>
             </tr>
         </table>
@@ -35,6 +35,7 @@ const editQuiz=(id:number|null=null)=>{
 }
 
 const viewQuestions=(id:number)=>{
+    debugger
     store.selectQuiz(id);
     store.toggleQuestions();
 }

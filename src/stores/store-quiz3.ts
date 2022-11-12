@@ -1,11 +1,14 @@
 import type { ProjectInput } from '@/models/Inputs/Project';
+import type { QuizInput } from '@/models/Inputs/QuizInput';
 import type { Project } from '@/models/Project';
+import type { Question } from '@/models/Question';
+import type { Quiz } from '@/models/Quiz';
 
 
 //import { initializeProvider } from '@metamask/providers';
 
 import { defineStore } from 'pinia'
-import { getProjects, postProject } from './api';
+import { getProjects, postProject, postQuestion, postQuiz } from './api';
 import { useWallet } from './store-wallet';
 
 
@@ -74,12 +77,13 @@ export const useQuiz = defineStore('city/quiz', {
       if(this.project){
         postProject(this.project as ProjectInput).then((res:Project)=>{
           this.project=res;
+          this.projects.push(res);
         });
       }
     },
 
     selectProject(id: number|null){
-      debugger
+      
       if(id!=null){
         this.project = this.projects.find(item=>item.id==id)??null;
         
@@ -96,11 +100,26 @@ export const useQuiz = defineStore('city/quiz', {
       this.project=null;
     },
 
+
+
+    registerQuiz(){
+      if(this.project?.quiz){
+        postQuiz(this.project!.quiz).then((res:Quiz)=>{
+          this.project!.quiz=res;
+          if(this.project!.quizes==undefined){
+            this.project!.quizes=[];
+          }
+          this.project!.quizes!.push(res);
+        });
+      }
+    },
+
     selectQuiz(id:number | null){
       if(this.project==null){
         alert("Elija un projecto!");
         return;
       }
+      debugger
       if(id!=null){
         this.project.quiz = this.project!.quizes!.find(item=>item.id==id);
         
@@ -116,6 +135,41 @@ export const useQuiz = defineStore('city/quiz', {
     clearQuiz(){
       if(this.project){
         this.project.quiz=undefined;
+      }
+    },
+
+
+    registerQuestion(){
+      if(this.project?.quiz?.question){
+        postQuestion(this.project!.quiz!.question).then((res:Question)=>{
+          this.project!.quiz!.question=res;
+          if(this.project!.quiz!.questions==undefined){
+            this.project!.quiz!.questions=[];
+          }
+          this.project!.quiz!.questions!.push(res);
+        });
+      }
+    },
+    selectQuestion(id?:number){
+      
+      if(!this.project && !this.project!.quiz){
+        alert("Elija un  un quiz!");
+        return;
+      }
+      if(id!=null){
+        this.project!.quiz!.question = this.project!.quiz!.questions.find(item=>item.id==id);
+        
+        console.log(this.project?.quiz?.question);
+      }else{
+        this.project!.quiz!.question={
+          quiz_id: this.project!.quiz!.id!,
+          name:'',
+        }
+      }
+    },
+    clearQuestion(){
+      if(this.project?.quiz?.question){
+        this.project.quiz.question=undefined;
       }
     },
 

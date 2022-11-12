@@ -2,16 +2,21 @@
 
     
     <Modal :show="showModal" @onmodal="handlerShowModal($event)">
-        <p>Answer </p>
+        <p>La respuesta</p>
         <div class="form-controls">
             <div class="form-input">
-                <label for="name-project">Name</label>
-                <input type="text" class="input-form">
+                <label for="name-answer"> {{dataQuiz!.name}}</label>
+                
+                <select v-model="dataQuiz!.answer_id">
+                    <option v-for="item of dataQuiz!.questions" :key="item.id" :value="item.id">{{item.name}}</option>
+                    
+                </select>
             </div>
+
         </div>
 
         <div class="footer">
-            <button @click="showModal=false">Close</button>
+            <button @click="handlerShowModal(false)">Close</button>
             <button >Guardar</button>
         </div>
     </Modal>
@@ -20,14 +25,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { useQuiz } from "@/stores/store-quiz3";
+import { computed, ref } from "vue";
 import Modal from "./Modal.vue";
 
-const showModal = ref(false);
+const storeQuiz = useQuiz();
+const showModal= computed(()=>storeQuiz.showFormAnswer);
+const dataQuiz = computed(()=>{
+    return storeQuiz.getQuiz;
+});
 
 const handlerShowModal=(show: boolean)=>{
-    //console.log('handler:',show);
-    showModal.value=show;
+    
+    /* if(!show){
+        storeQuiz.clearQuestion();
+    } */
+    storeQuiz.showAnswer(show);
 }
 
 </script>

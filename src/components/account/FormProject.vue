@@ -21,7 +21,7 @@
 
         <div class="footer">
             <button @click="handlerShowModal(false)">Close</button>
-            <button >Guardar</button>
+            <button v-if="!dataProject?.id" @click="handlerSave">Guardar</button>
         </div>
     </Modal>
         
@@ -49,6 +49,11 @@ const handlerShowModal=(show: boolean)=>{
         storeQuiz.clearProject();
     }
     storeQuiz.showProject(show);
+}
+
+
+const handlerSave=()=>{
+    storeQuiz.registerProject();
 }
 
 </script>

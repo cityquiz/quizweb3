@@ -1,31 +1,60 @@
 <template>
     <div class="container">
+
         <table class="table">
             <tr>
-                <th>Question</th>
-                <th></th>
+                <th>
+                    <span>{{pregunta?.name}}</span>
+                    
+                </th>
+                <th>
+                    <span class="title-answer" v-if="pregunta!.id"> <button @click="editAnswer()" class="btn-add">Risposta</button></span>
+                </th>
             </tr>
             <tr>
-                
-                <td colspan="3" ><FormQuestion></FormQuestion> <button @click="show" class="btn-add">Add</button> </td>
-                
+                <td colspan="3" >
+                    <FormQuestion></FormQuestion> 
+                    <FormAnswer></FormAnswer>
+                    <button @click="editQuestion()" class="btn-add">Add</button> 
+                </td>
+
             </tr>
-            <tr>
-                <td>Berglunds snabbköp</td>
-                <td><button @click="show" class="btn-add">ver</button></td>
-            </tr>
-            <tr>
-                <td>Francisco Chang</td>
-                <td> <button @click="show" class="btn-add">Ver</button> </td>
+            <tr v-for="item of questions" :key="'question' + item.id">
+                <td>{{item.name}}</td>
+                <td>
+                    
+                    <button @click="editQuestion(item.id)" class="btn-add">ver</button>
+                    
+                </td>
             </tr>
         </table>
     </div>
 </template>
 <script setup lang="ts">
+import { useQuiz } from "@/stores/store-quiz3";
+import { computed } from "vue";
 import FormQuestion from "./FormQuestion.vue";
+import FormAnswer from "./FormAnswer.vue";
 
-const show=()=>{
 
+
+
+
+const store= useQuiz();
+const questions = computed(()=>store.getQuestions);
+const pregunta= computed(()=>store.getQuiz);
+
+
+const editQuestion=(id?:number)=>{
+    debugger
+    store.selectQuestion(id);
+    store.showQuestion(true);
+    //store.toggleQuestions();
+}
+
+const editAnswer=()=>{
+    //store.selectQuiz(id);
+    store.showAnswer(true);
 }
 
 </script>
@@ -67,5 +96,13 @@ const show=()=>{
     margin-bottom: 3px;
     color: white;
     float:right;
+}
+.title-quiz{
+    display: flex;
+    justify-content: space-between;
+}
+.title-answer{
+    display: flex;
+    justify-content: flex-end;
 }
 </style>

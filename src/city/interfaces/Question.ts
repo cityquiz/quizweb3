@@ -4,7 +4,8 @@ export interface Question{
     response_correct_id?: string;
 
     
-    id: string;
-    question: string;
-    options: Option[];
+    id?: number;
+    quiz_id: number;
+    name: string;
+    options?: Option[];
 }

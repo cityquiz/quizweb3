@@ -1,9 +1,12 @@
 import { Enemies } from "@/city/Content/enemies";
+import type { AnswerInput } from "@/models/Inputs/AnswerInput";
 import type { CheckProjectInput } from "@/models/Inputs/CheckProjectInput";
 import type { ProjectInput } from "@/models/Inputs/Project";
+import type { QuestionInput } from "@/models/Inputs/QuestionInput";
+import type { QuizInput } from "@/models/Inputs/QuizInput";
 import type { Project } from "@/models/Project";
 import type { Quiz } from "@/models/Quiz";
-const cn= "http://localhost:8000";
+const cn= "http://localhost:3000";
 
 const post=(uri: string, args:{})=>{
     return fetch(`${uri}`, {
@@ -50,6 +53,21 @@ const postProject= (data: ProjectInput):Promise<Project>=>{
     return post(`${cn}/projects`, data);
 }
 
+const postQuiz=(data:QuizInput)=>{
+  return post(`${cn}/quizes`, data);
+}
+
+
+const postQuestion=(data:QuestionInput)=>{
+  return post(`${cn}/questions`, data);
+}
+
+const postAnswer=(data:AnswerInput)=>{
+  return post(`${cn}/answers`, data);
+}
+
+
+
 
 const getProjectQuizById=(project_id:string):Promise<Project>=>{
   const quiz= {
@@ -90,6 +108,9 @@ const getProjectQuizById=(project_id:string):Promise<Project>=>{
 
 
 
+
+
+
 const postCheckQuizProject=async (response:CheckProjectInput)=>{
   //const Enemies.values
   
@@ -102,6 +123,9 @@ const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 export {
     getProjects,
     postProject,
+    postQuiz,
+    postQuestion,
+    postAnswer,
     getProjectQuizById,
-    postCheckQuizProject
+    postCheckQuizProject,
 }

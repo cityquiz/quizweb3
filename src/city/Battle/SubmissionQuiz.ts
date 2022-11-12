@@ -46,7 +46,7 @@ export class SubmissionQuiz implements ConfigSubmissionQuiz{
             //return this.question.options.map(opt=>{
                 return this.quiz.questions.map(opt=>{
                 return {
-                    label: opt.question,
+                    label: opt.name,
                     description: '',
                     handler:()=>{
                         /* this.caster.answers.push({
