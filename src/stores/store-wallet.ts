@@ -153,6 +153,7 @@ export const useWallet = defineStore('city/wallet', {
           ...this.user,
           ...res
         };
+        this.getUris();
         return true;
       })
     },
