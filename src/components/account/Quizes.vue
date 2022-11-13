@@ -81,4 +81,8 @@ const viewQuestions=(id:number)=>{
     color: white;
     float:right;
 }
+
+.container{
+    background-color: white;
+}
 </style>

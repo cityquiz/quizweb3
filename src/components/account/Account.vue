@@ -85,11 +85,15 @@ const handlerClaim=()=>{
 
 <style  scoped>
   .container-logo{
-    height: 20px;
+    height: 23px;
     margin-left: auto;
     margin-right: auto;
-    /* width: 20%; */
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+ 
     float: right;
+    background-color: white;
   }
 
   .logo-canvas{

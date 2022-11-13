@@ -105,4 +105,7 @@ const editAnswer=()=>{
     display: flex;
     justify-content: flex-end;
 }
+.container{
+    background-color: white;
+}
 </style>
