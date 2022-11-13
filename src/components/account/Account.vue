@@ -6,7 +6,10 @@
        <button @click="handlerQuestion">Opciones </button>
        <!-- <button @click="handlerAnswer">Answers </button> -->
        
+       <div class="container-logo"><img class="logo-canvas" src="/assets/logo.png" ></div>   
     </div>
+    
+    
     <Bag v-if="openBag"></Bag>
     <Projects v-if="openProjects" :key="'npc'"></Projects>
     <Quizes v-if="openQuiz" :key="'qu'"></Quizes>
@@ -80,6 +83,25 @@ const handlerClaim=()=>{
 }
 </script>
 
-<style scoped >
+<style  scoped>
+  .container-logo{
+    height: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    /* width: 20%; */
+    float: right;
+  }
 
+  .logo-canvas{
+    height: 20px;
+    display: block;
+    
+  }
+  .float-right{
+    float: right;
+  }
+  .container-account button{
+    /* border-style: dotted; */
+    margin-right: 3px;
+  }
 </style>

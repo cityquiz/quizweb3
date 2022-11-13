@@ -4,7 +4,8 @@
     top: 10px;
     image-rendering: pixelated;
     width: 500px;
-    background-color: lavender; 
+    /* background-color: lavender;  */
+    background-color: rgba(245, 245, 245, 0.371);
 }
 
 .Hud .Combatant{

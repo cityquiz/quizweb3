@@ -133,17 +133,6 @@ export const useWallet = defineStore('city/wallet', {
       //await signerContract.addNftWhiteList("0x38758D4E61Bf99C61ecAcfFBa4e779645e0264FD");
     },
 
-
-   
-
-
-
-
-
-
-
-    
-
 */
 
     async registerToken(token:string,project_id: string ){
