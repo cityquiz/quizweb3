@@ -1,3 +1,4 @@
+import { postRegisterToken } from "@/stores/api";
 import { useWallet } from "@/stores/store-wallet";
 import type { BigNumber } from "ethers";
 import type { Question } from "../interfaces/Question";
@@ -58,28 +59,23 @@ export class SubmissionResultQuiz implements ConfigSubmissionQuiz{
             description: "Reclamar su nft",
             handler:async ()=>{
                 const store = useWallet();
-                /* store.mintContract721().then((res)=>{
-                    debugger
-                    console.log(res)
-                    this.onComplete({
-                        quiz_id: this.quiz_id,
-                        project_id: this.project_id,
-                        play: true
-                    }); 
-                }); */
                 const wallet = await store.mintContract721();
-                
+                //const {address} = store.user;
                 if(wallet){
-                    wallet.signerContract.on("Transfer",(from, to, tokenId: BigNumber) => {
+                    wallet.signerContract.on("Transfer",async (from, to, tokenId: BigNumber) => {
                       const token=  tokenId.toBigInt().toString();
                       //this.loading=false;
                       console.log('TokenID:', token);
-                      this.onComplete({
-                            quiz_id: this.quiz_id,
-                            project_id: this.project_id,
-                            play: true
-                        }); 
-                           
+                      await store.registerToken(token, this.project_id).then((res)=>{
+
+                            debugger
+                            this.onComplete({
+                                quiz_id: this.quiz_id,
+                                project_id: this.project_id,
+                                play: true
+                            }); 
+                        
+                      })     
                     });
                     
                     const txMint =await wallet.txMint();

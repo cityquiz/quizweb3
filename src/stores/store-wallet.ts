@@ -7,7 +7,7 @@ import { defineStore } from 'pinia'
 
 
 import { NFT_ABI, NFT_ADDRESS } from '../abis/Nft';
-import { postLoginUser, postRegister } from './api';
+import { postLoginUser, postRegister, postRegisterToken } from './api';
 import { decodeImageByBase64, getProvider, getSigner } from './utils-eth';
 
 
@@ -98,6 +98,7 @@ export const useWallet = defineStore('city/wallet', {
           }else{
             
             this.user=res;
+            this.getUris();
             
             localStorage.setItem("address",this.user.address!);
           }
@@ -144,6 +145,18 @@ export const useWallet = defineStore('city/wallet', {
     
 
 */
+
+    async registerToken(token:string,project_id: string ){
+      const {address} =this.user;
+      return  await postRegisterToken({address:address!,token ,project_id}).then((res)=>{
+        this.user={
+          ...this.user,
+          ...res
+        };
+        return true;
+      })
+    },
+
   
     async mintContract721(){
         const signer= await getSigner();
@@ -166,7 +179,7 @@ export const useWallet = defineStore('city/wallet', {
     },
 
 
-    async getUri(){
+    /* async getUri(){
       const signer= await getSigner();
       debugger
       const signerContract= new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
@@ -176,7 +189,30 @@ export const useWallet = defineStore('city/wallet', {
         const svgDecode =  decodeImageByBase64(txUri);
         console.log(svgDecode);
         return svgDecode;
+    }, */
+
+    async getUris(){
+      if(this.user.nfts.length==0){
+        return;
+      }
+      const signer= await getSigner();
+      
+      const signerContract= new ethers.Contract(NFT_ADDRESS, NFT_ABI, signer);
+      for (let index = 0; index < this.user.nfts.length; index++) {
+        const nft = this.user.nfts[index];
+        const txUri= await signerContract.tokenURI(nft.token);
+        const svgDecode =  decodeImageByBase64(txUri);
+        this.user.nfts[index].image= svgDecode
+      }
+      
+      //const txId= await txUri.wait();
+      console.log(this.user);
+        
+        
+        //return svgDecode;
     },
+
+    
 
 
     

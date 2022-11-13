@@ -79,7 +79,17 @@ export class TurnCycle implements ConfigTurnCycle{
                 project_id: result.aproved ? this.battle.enemy.quiz_id: null,
                 //target: submission.target
             }
-            await this.onNewEvent(eventResult);
+        const resultClaim =await this.onNewEvent(eventResult);
+
+            debugger
+        console.log(resultClaim);
+        if(resultClaim.play){
+            const eventOk = {
+                type: "OK",
+                //target: submission.target
+            }
+            await this.onNewEvent(eventOk);
+        }
         //}
 
 

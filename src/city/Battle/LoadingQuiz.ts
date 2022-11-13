@@ -73,9 +73,9 @@ export class LoadingQuiz implements ConfigLoadingQuiz{
             
             console.log("evaluo la respuesta del server");
             this.onComplete({
-                message: 'messagio provado',//res.message,
+                message: res.message,
                 loading:false,
-                aproved: false//res.aproved
+                aproved: res.aproved
             });
         })
 

@@ -209,7 +209,7 @@ export const useQuiz = defineStore('city/quiz', {
 
       if(this.openBag){
         const store= useWallet();
-        store.getUri()
+        //store.getUri()
       }
     },
     toggleQuiz(){

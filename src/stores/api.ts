@@ -5,6 +5,7 @@ import type { CheckProjectInput } from "@/models/Inputs/CheckProjectInput";
 import type { ProjectInput } from "@/models/Inputs/Project";
 import type { QuestionInput } from "@/models/Inputs/QuestionInput";
 import type { QuizInput } from "@/models/Inputs/QuizInput";
+import type { ClaimTokenInput } from "@/models/Inputs/ClaimTokenInput";
 import type { Project } from "@/models/Project";
 
 const cn= "http://localhost:3000";
@@ -129,6 +130,19 @@ const postCheckQuizProject=async (response:CheckProjectInput)=>{
   
 }
 
+
+const postRegisterToken=async (response:ClaimTokenInput)=>{
+  //const Enemies.values
+  
+  //await sleep(10000);
+  console.log(response);
+   return post(`${cn}/user/register/token`,response);
+  
+}
+
+
+
+
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 
 export {
@@ -140,5 +154,6 @@ export {
     getProjectQuizById,
     postCheckQuizProject,
     postRegister,
-    postLoginUser
+    postLoginUser,
+    postRegisterToken
 }

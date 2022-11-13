@@ -1,37 +1,25 @@
 <template>
 
     <div   class="container-mochila">
-        <div class="Mochila" >
-            <a target="_blank" href="img_5terre.jpg">
-                <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="Cinque Terre" >
-            </a>
-            <div class="desc">Add a description of the image here</div>
+            <div class="Mochila" v-for="item of tokens" :key="item.id">
+              <a target="_blank" href="https://moonbase.moonscan.io/address/0x3aBc3747D77111E41d27Ce44369994ee88b4CE4d">
+                  <img :src="item.image"  >
+              </a>
+              <!-- <div class="desc">Add a description of the image here</div> -->
             </div>
-
-            <div class="Mochila">
-            <a target="_blank" href="img_forest.jpg">
-                <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="Forest" >
-            </a>
-            <div class="desc">Add a description of the image here</div>
-            </div>
-
-            <div class="Mochila">
-            <a target="_blank" href="img_lights.jpg">
-                <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="Northern Lights" >
-            </a>
-            <div class="desc">Add a description of the image here</div>
-            </div>
-
-            <div class="Mochila">
-            <a target="_blank" href="img_mountains.jpg">
-                <img src="https://www.w3schools.com/css/img_5terre.jpg" alt="Mountains" >
-            </a>
-            <div class="desc">Add a description of the image here</div>
-            </div>
-    
     </div>
 
 </template>
+<script setup lang="ts">
+import { useWallet } from '@/stores/store-wallet';
+import { computed } from 'vue';
+
+
+const store = useWallet();
+
+const tokens = computed(()=>store.getUser.nfts);
+
+</script>
 
 <style scoped>
     .Mochila {

@@ -5,7 +5,7 @@
        <button @click="handlerQuiz">Preguntas </button>
        <button @click="handlerQuestion">Opciones </button>
        <!-- <button @click="handlerAnswer">Answers </button> -->
-       <img v-if="uriNft" :src="uriNft" alt="">
+       
     </div>
     <Bag v-if="openBag"></Bag>
     <Projects v-if="openProjects" :key="'npc'"></Projects>
@@ -50,7 +50,7 @@ const handlerProjects = ()=>{
 
 const handlerBag = ()=>{
   storeQuiz.toggleBag();
-  handlerClaim();
+  //handlerClaim();
   
 }
 
@@ -71,12 +71,12 @@ const handlerAnswer = ()=>{
 
 
 const handlerClaim=()=>{
-    stateuser.getUri().then((res)=>{
+    /* stateuser.getUri().then((res)=>{
         debugger
         //btoa(res.split(','))
         console.log(res);
         uriNft.value=res;
-    }); 
+    });  */
 }
 </script>
 

@@ -5,6 +5,7 @@ import type { Battle } from "./Battle";
 import { BattleAnimations } from "./BattleAnimations";
 import type { Combatant } from "./Combatant";
 import { LoadingQuiz } from "./LoadingQuiz";
+import { SubmissionOK } from "./SubmissionOK";
 import { SubmissionQuiz } from "./SubmissionQuiz";
 import { SubmissionResultQuiz } from "./SubmissionResultQuiz";
 
@@ -40,7 +41,7 @@ export class BattleEvent{
         const menu = new SubmissionQuiz({
             quiz: question!,
             onComplete: (submission)=>{
-                //submission what move to use  who  to use it on
+                
                 resolve(submission);
             }
         });
@@ -55,9 +56,8 @@ export class BattleEvent{
             project_id: this.event.project_id,
             quiz_id: this.event.quiz_id,
             message: this.event.message,
-            onComplete: (submission: any)=>{
-                //submission what move to use  who  to use it on
-                resolve(submission);
+            onComplete: (claimResult: any)=>{
+                resolve(claimResult);
             }
         });
         menu.init(this.battle.element!);
@@ -84,6 +84,18 @@ export class BattleEvent{
 
         });
         menu.init(this.battle.element!);
+    }
+
+    OK(resolve: (arg: any)=>void){
+        const menu = new SubmissionOK({
+            ...this.event,
+            onComplete: (submission)=>{
+                //submission what move to use  who  to use it on
+                resolve(submission);
+            },
+        });
+        menu.init(this.battle.element!);
+        
     }
 
     
